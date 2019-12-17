@@ -47,10 +47,13 @@ app.on('request',(req,res)=>{
             res.end(data)
         })
     }
-    // 处理页面发送的插件请求
+    // 处理页面引入插件发送的请求
     else if(method == 'GET' && url == '/node_modules/bootstrap/dist/css/bootstrap.css' ){
-        fs.readFile(path.join(__dirname,'./node_modules/bootstrap/dist/css/bootstrap.css'),'utf-8',(err,data)=>{
+        fs.readFile(path.join(__dirname,'/node_modules/bootstrap/dist/css/bootstrap.css'),'utf-8',(err,data)=>{
             if(err) return console.log(err.message);
+            res.writeHeader(200,{
+                'Content-Type' : 'text/css;charset = utf-8'
+            })
             res.end(data)
         })
     }else if(method == 'GET' && url == '/node_modules/jquery/dist/jquery.js' ){
